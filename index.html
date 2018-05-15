@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./src/css/index.css">
     <link rel="stylesheet" href="./src/css/resume.css">
     <link rel="stylesheet" href="./src/css/editable-span.css">
+    <link rel="stylesheet" href="./src/css/login.css">
+    <link rel="stylesheet" href="./src/css/signUp.css">
 </head>
 
 <body>
@@ -15,7 +17,7 @@
             <div class="upper">
                 <ul class="actions">
                     <li>
-                        <button class="button">保存</button>
+                        <button class="button" @click="onClickSave">保存</button>
                     </li>
                     <li>
                         <button class="button">分享</button>
@@ -29,45 +31,45 @@
                 </ul>
             </div>
             <div class="down">
-                <button class="button">退出</button>
+                <button class="button">登出</button>
             </div>
         </aside>
         <main>
             <div class="resume">
                 <section class="profile">
                     <h1>
-                       <editable-span :value="resume.name" @edit="onEdit('name', $event)"></editable-span>
+                        <editable-span :value="resume.name" @edit="onEdit('name', $event)"></editable-span>
                     </h1>
                     <p>应聘职位：
-                        <editable-span :value="resume.jobTitle" @edit="onEdit('jobTitle',$event)"></editable-span>
+                        <editable-span :value="resume.jobTitle" @edit="onEdit('jobTitle', $event)"></editable-span>
                     </p>
                     <p class="profile">
-                        <editable-span :value="resume.birthday" @edit="onEdit('birthday',$event)"></editable-span>
+                        <editable-span :value="resume.birthday" @edit="onEdit('birthday', $event)"></editable-span>
                         |
-                        <editable-span :value="resume.gender" @edit="onEdit('gender',$event)"></editable-span>
+                        <editable-span :value="resume.gender" @edit="onEdit('gender', $event)"></editable-span>
                         |
-                        <editable-span :value="resume.email" @edit="onEdit('email',$event)"></editable-span>
+                        <editable-span :value="resume.email" @edit="onEdit('email', $event)"></editable-span>
                         |
-                        <editable-span :value="resume.phone" @edit="onEdit('phone',$event)"></editable-span>
+                        <editable-span :value="resume.phone" @edit="onEdit('phone', $event)"></editable-span>
                     </p>
                 </section>
                 <section class="skills">
                     <h2>技能</h2>
                     <ul>
                         <li>
-                            <span class="name">静态页面制作</span>
+                            <span class="name"> 静态页面制作 </span>
                             <div class="description">完美实现设计稿</div>
                         </li>
                         <li>
-                            <span class="name">静态页面制作</span>
+                            <span class="name"> 静态页面制作 </span>
                             <div class="description">完美实现设计稿</div>
                         </li>
                         <li>
-                            <span class="name">静态页面制作</span>
+                            <span class="name"> 静态页面制作 </span>
                             <div class="description">完美实现设计稿</div>
                         </li>
                         <li>
-                            <span class="name">静态页面制作</span>
+                            <span class="name"> 静态页面制作 </span>
                             <div class="description">完美实现设计稿</div>
                         </li>
                     </ul>
@@ -79,43 +81,94 @@
                             <header>
                                 <div class="start">
                                     <h3 class="name">我的简历</h3>
-                                    <span class="link">http://xxxx/xxxx</span>
+                                    <span class="link">http://xxxx/xxx</span>
                                 </div>
                                 <div class="end">
-                                    <span class="keywords">CSS3、响应式、jQuery</span>
+                                    <span class="keywords">CSS3、jQuery、响应式</span>
                                 </div>
                             </header>
-                            <p class="description">我是怎么做这个项目的</p>
+                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
                         </li>
                         <li>
                             <header>
                                 <div class="start">
                                     <h3 class="name">我的简历</h3>
-                                    <span class="link">http://xxxx/xxxx</span>
+                                    <span class="link">http://xxxx/xxx</span>
                                 </div>
                                 <div class="end">
-                                    <span class="keywords">CSS3、响应式、jQuery</span>
+                                    <span class="keywords">CSS3、jQuery、响应式</span>
                                 </div>
                             </header>
-                            <p class="description">我是怎么做这个项目的</p>
+                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
                         </li>
                         <li>
                             <header>
                                 <div class="start">
                                     <h3 class="name">我的简历</h3>
-                                    <span class="link">http://xxxx/xxxx</span>
+                                    <span class="link">http://xxxx/xxx</span>
                                 </div>
                                 <div class="end">
-                                    <span class="keywords">CSS3、响应式、jQuery</span>
+                                    <span class="keywords">CSS3、jQuery、响应式</span>
                                 </div>
                             </header>
-                            <p class="description">我是怎么做这个项目的</p>
+                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
+                        </li>
+                        <li>
+                            <header>
+                                <div class="start">
+                                    <h3 class="name">我的简历</h3>
+                                    <span class="link">http://xxxx/xxx</span>
+                                </div>
+                                <div class="end">
+                                    <span class="keywords">CSS3、jQuery、响应式</span>
+                                </div>
+                            </header>
+                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
                         </li>
                     </ol>
                 </section>
             </div>
         </main>
+        
+        
+        <div v-show="loginVisible" class="login">
+            <form class="form">
+                <h2>登录</h2>
+                <button @click="loginVisible = false">关闭</button>
+                <div class="row">
+                    <label>邮箱</label>
+                    <input type="text">
+                </div>
+                <div class="row">
+                    <label>密码</label>
+                    <input type="text">
+                </div>
+                <div class="actions">
+                    <button>提交</button>
+                    <a href="#" @click="signUpVisible = true; loginVisible = false">注册</a>
+                </div>
+            </form>
+        </div>
+        <div v-show="signUpVisible" class="signUp">
+            <form class="form">
+                <h2>注册</h2>
+                <button @click="loginVisible = false">关闭</button>
+                <div class="row">
+                    <label>邮箱</label>
+                    <input type="text">
+                </div>
+                <div class="row">
+                    <label>密码</label>
+                    <input type="text">
+                </div>
+                <div class="actions">
+                    <button>提交</button>
+                    <a href="#" @click="signUpVisible=false; loginVisible=true;">登录</a>
+                </div>
+            </form>
+        </div>
     </div>
+
     <script src="./vendors/av-min.js"></script>
     <script src="./JS/av.js"></script>
     <script src="./vendors/vue.min.js"></script>
