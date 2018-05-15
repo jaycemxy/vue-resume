@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jaycemxy/vue-resume#readme",
   "dependencies": {
-    "leancloud-storage": "^3.6.8"
+    "leancloud-storage": "^3.6.8",
+    "vue": "^2.5.13"
   }
 }
