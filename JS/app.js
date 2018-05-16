@@ -5,7 +5,7 @@ let app = new Vue({
         loginVisible: false,
         signUpVisible: false,
         currentUser: {
-            id: undefined,
+            objectId: undefined,
             email: '',
             fuck: 'fuck'
         },
@@ -15,7 +15,24 @@ let app = new Vue({
             birthday: '1990年1月',
             jobTitle: '前端工程师',
             phone: '138111111111',
-            email: 'example@example.com'
+            email: 'example@example.com',
+            skills: [{
+                    name: '请填写技能名称',
+                    description: '请填写技能描述'
+                },
+                {
+                    name: '请填写技能名称',
+                    description: '请填写技能描述'
+                },
+                {
+                    name: '请填写技能名称',
+                    description: '请填写技能描述'
+                },
+                {
+                    name: '请填写技能名称',
+                    description: '请填写技能描述'
+                },
+            ]
         },
         login: {
             email: '',
@@ -28,12 +45,30 @@ let app = new Vue({
     },
     methods: {
         onEdit(key, value) {
-            this.resume[key] = value
+            let regex = /\[(\d+)\]/g
+            key = key.replace(regex, (match, number) => `.${number}`)
+            // key = skills.0.name
+            keys = key.split('.')
+            console.log(keys)
+            console.log(value)
+            let result = this.resume
+            for (let i = 0; i < keys.length; i++) {
+                if (i === keys.length - 1) {
+                    result[keys[i]] = value
+                } else {
+                    result = result[keys[i]]
+                }
+            }
+        },
+        hasLogin() {
+            return !!this.currentUser.objectId
         },
         onLogin(e) {
             AV.User.logIn(this.login.email, this.login.password).then((user) => {
-                this.currentUser.id = user.id
-                this.currentUser.email = user.attributes.email
+                user = user.toJSON()
+                this.currentUser.objectId = user.objectId
+                this.currentUser.email = user.email
+                this.loginVisible = false
             }, (error) => {
                 if (error.code === 211) {
                     alert('邮箱不存在')
@@ -52,7 +87,15 @@ let app = new Vue({
             user.setUsername(this.signUp.email)
             user.setPassword(this.signUp.password)
             user.setEmail(this.signUp.email)
-            user.signUp().then((user) => {}, (error) => {})
+            user.signUp().then((user) => {
+                alert('注册成功')
+                user = user.toJSON()
+                this.currentUser.objectId = user.objectId
+                this.currentUser.email = user.email
+                this.signUpVisible = false
+            }, (error) => {
+                alert(error.rawMessage)
+            })
         },
         onClickSave() {
             let currentUser = AV.User.current()
@@ -63,15 +106,39 @@ let app = new Vue({
             }
         },
         saveResume() {
-            let {id} = AV.User.current()
-            let user = AV.Object.createWithoutData('User', id)
+            let {
+                objectId
+            } = AV.User.current().toJSON()
+            let user = AV.Object.createWithoutData('User', objectId)
             user.set('resume', this.resume)
-            user.save()
+            user.save().then(() => {
+                alert('保存成功')
+            }, () => {
+                alert('保存失败')
+            })
         },
+        getResume() {
+            var query = new AV.Query('User');
+            query.get(this.currentUser.objectId).then((user) => {
+                let resume = user.toJSON().resume
+                Object.assign(this.resume, resume)
+            }, (error) => {
+                // 异常处理
+            });
+        },
+        addSkill() {
+            this.resume.skills.push({
+                name: '请填写技能名称',
+                description: '请填写技能描述'
+            })
+        },
+        removeSkill(index) {
+            this.resume.skills.splice(index, 1)
+        }
     }
 })
-
 let currentUser = AV.User.current()
 if (currentUser) {
     app.currentUser = currentUser.toJSON()
+    app.getResume()
 }

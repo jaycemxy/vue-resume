@@ -11,168 +11,161 @@
     <link rel="stylesheet" href="./src/css/signUp.css">
 </head>
 
-<body>
-    <div class="page" id="app">
-        <aside>
-            <div class="upper">
-                <ul class="actions">
-                    <li>
-                        <button class="button" @click="onClickSave">保存</button>
+<div class="page" id="app">
+    <aside>
+        <div class="upper">
+            <ul class="actions">
+                <li>
+                    <button class="button" @click="onClickSave">保存</button>
+                </li>
+                <li>
+                    <button class="button">分享</button>
+                </li>
+                <li>
+                    <button class="button">打印</button>
+                </li>
+                <li>
+                    <button class="button">换肤</button>
+                </li>
+            </ul>
+        </div>
+        <div class="down">
+            <button class="button" @click="onLogout" v-show="hasLogin()">登出</button>
+        </div>
+    </aside>
+    <main>
+        <div class="resume">
+            {{resume}}
+            <section class="profile">
+                <h1>
+                    <editable-span :value="resume.name" @edit="onEdit('name', $event)"></editable-span>
+                </h1>
+                <p>应聘职位：
+                    <editable-span :value="resume.jobTitle" @edit="onEdit('jobTitle', $event)"></editable-span>
+                </p>
+                <p class="profile">
+                    <editable-span :value="resume.birthday" @edit="onEdit('birthday', $event)"></editable-span>
+                    |
+                    <editable-span :value="resume.gender" @edit="onEdit('gender', $event)"></editable-span>
+                    |
+                    <editable-span :value="resume.email" @edit="onEdit('email', $event)"></editable-span>
+                    |
+                    <editable-span :value="resume.phone" @edit="onEdit('phone', $event)"></editable-span>
+                </p>
+            </section>
+            <section class="skills">
+                <h2>技能</h2>
+                <ul>
+                    <li v-for="skill,index in resume.skills">
+                        <editable-span class="name" :value="skill.name" @edit="onEdit(`skills[${index}].name`, $event)"></editable-span>
+                        <div class="description">
+                            <editable-span :value="skill.description" @edit="onEdit(`skills[${index}].description`, $event)"></editable-span>
+                        </div>
+                        <span class="remove" v-if="index>=4" @click="removeSkill(index)">x</span>
                     </li>
                     <li>
-                        <button class="button">分享</button>
-                    </li>
-                    <li>
-                        <button class="button">打印</button>
-                    </li>
-                    <li>
-                        <button class="button">换肤</button>
+                        <span @click="addSkill">添加</span>
                     </li>
                 </ul>
-            </div>
-            <div class="down">
-                <button class="button" @click="onLogout" v-show="!!currentUser.id">登出</button>
-            </div>
-        </aside>
-        <main>
-            <div class="resume">
-                {{currentUser}}
-                <section class="profile">
-                    <h1>
-                        <editable-span :value="resume.name" @edit="onEdit('name', $event)"></editable-span>
-                    </h1>
-                    <p>应聘职位：
-                        <editable-span :value="resume.jobTitle" @edit="onEdit('jobTitle', $event)"></editable-span>
-                    </p>
-                    <p class="profile">
-                        <editable-span :value="resume.birthday" @edit="onEdit('birthday', $event)"></editable-span>
-                        |
-                        <editable-span :value="resume.gender" @edit="onEdit('gender', $event)"></editable-span>
-                        |
-                        <editable-span :value="resume.email" @edit="onEdit('email', $event)"></editable-span>
-                        |
-                        <editable-span :value="resume.phone" @edit="onEdit('phone', $event)"></editable-span>
-                    </p>
-                </section>
-                <section class="skills">
-                    <h2>技能</h2>
-                    <ul>
-                        <li>
-                            <span class="name"> 静态页面制作 </span>
-                            <div class="description">完美实现设计稿</div>
-                        </li>
-                        <li>
-                            <span class="name"> 静态页面制作 </span>
-                            <div class="description">完美实现设计稿</div>
-                        </li>
-                        <li>
-                            <span class="name"> 静态页面制作 </span>
-                            <div class="description">完美实现设计稿</div>
-                        </li>
-                        <li>
-                            <span class="name"> 静态页面制作 </span>
-                            <div class="description">完美实现设计稿</div>
-                        </li>
-                    </ul>
-                </section>
-                <section class="projects">
-                    <h2>项目经历</h2>
-                    <ol>
-                        <li>
-                            <header>
-                                <div class="start">
-                                    <h3 class="name">我的简历</h3>
-                                    <span class="link">http://xxxx/xxx</span>
-                                </div>
-                                <div class="end">
-                                    <span class="keywords">CSS3、jQuery、响应式</span>
-                                </div>
-                            </header>
-                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
-                        </li>
-                        <li>
-                            <header>
-                                <div class="start">
-                                    <h3 class="name">我的简历</h3>
-                                    <span class="link">http://xxxx/xxx</span>
-                                </div>
-                                <div class="end">
-                                    <span class="keywords">CSS3、jQuery、响应式</span>
-                                </div>
-                            </header>
-                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
-                        </li>
-                        <li>
-                            <header>
-                                <div class="start">
-                                    <h3 class="name">我的简历</h3>
-                                    <span class="link">http://xxxx/xxx</span>
-                                </div>
-                                <div class="end">
-                                    <span class="keywords">CSS3、jQuery、响应式</span>
-                                </div>
-                            </header>
-                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
-                        </li>
-                        <li>
-                            <header>
-                                <div class="start">
-                                    <h3 class="name">我的简历</h3>
-                                    <span class="link">http://xxxx/xxx</span>
-                                </div>
-                                <div class="end">
-                                    <span class="keywords">CSS3、jQuery、响应式</span>
-                                </div>
-                            </header>
-                            <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
-                        </li>
-                    </ol>
-                </section>
-            </div>
-        </main>
-        <div v-show="loginVisible" class="login" v-cloak>
-            <form class="form" @submit.prevent="onLogin">
-                <h2>登录</h2>
-                <button type="button" @click="loginVisible = false">关闭</button>
-                <div class="row">
-                    <label>邮箱</label>
-                    <input type="text" v-model="login.email">
-                </div>
-                <div class="row">
-                    <label>密码</label>
-                    <input type="password" v-model="login.password">
-                </div>
-                <div class="actions">
-                    <button type="submit">提交</button>
-                    <a href="#" @click="signUpVisible = true; loginVisible = false">注册</a>
-                </div>
-            </form>
+            </section>
+            <section class="projects">
+                <h2>项目经历</h2>
+                <ol>
+                    <li>
+                        <header>
+                            <div class="start">
+                                <h3 class="name">我的简历</h3>
+                                <span class="link">http://xxxx/xxx</span>
+                            </div>
+                            <div class="end">
+                                <span class="keywords">CSS3、jQuery、响应式</span>
+                            </div>
+                        </header>
+                        <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
+                    </li>
+                    <li>
+                        <header>
+                            <div class="start">
+                                <h3 class="name">我的简历</h3>
+                                <span class="link">http://xxxx/xxx</span>
+                            </div>
+                            <div class="end">
+                                <span class="keywords">CSS3、jQuery、响应式</span>
+                            </div>
+                        </header>
+                        <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
+                    </li>
+                    <li>
+                        <header>
+                            <div class="start">
+                                <h3 class="name">我的简历</h3>
+                                <span class="link">http://xxxx/xxx</span>
+                            </div>
+                            <div class="end">
+                                <span class="keywords">CSS3、jQuery、响应式</span>
+                            </div>
+                        </header>
+                        <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
+                    </li>
+                    <li>
+                        <header>
+                            <div class="start">
+                                <h3 class="name">我的简历</h3>
+                                <span class="link">http://xxxx/xxx</span>
+                            </div>
+                            <div class="end">
+                                <span class="keywords">CSS3、jQuery、响应式</span>
+                            </div>
+                        </header>
+                        <p class="description">我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的我是怎么做这个项目的</p>
+                    </li>
+                </ol>
+            </section>
         </div>
-        <div v-show="signUpVisible" class="signUp" v-cloak>
-            <form class="form" @submit.prevent="onSignUp">
-                <h2>注册</h2>
-                <button type="button" @click="loginVisible = false">关闭</button>
-                <div class="row">
-                    <label>邮箱</label>
-                    <input type="text" v-model="signUp.email">
-                </div>
-                <div class="row">
-                    <label>密码</label>
-                    <input type="password" v-model="signUp.password">
-                </div>
-                <div class="actions">
-                    <button type="submit">提交</button>
-                    <a href="#" @click="signUpVisible=false; loginVisible=true;">登录</a>
-                </div>
-            </form>
-        </div>
+    </main>
+    <div v-show="loginVisible" class="login" v-cloak>
+        <form class="form" @submit.prevent="onLogin">
+            <h2>登录</h2>
+            <button type="button" @click="loginVisible = false">关闭</button>
+            <div class="row">
+                <label>邮箱</label>
+                <input type="text" v-model="login.email">
+            </div>
+            <div class="row">
+                <label>密码</label>
+                <input type="password" v-model="login.password">
+            </div>
+            <div class="actions">
+                <button type="submit">提交</button>
+                <a href="#" @click="signUpVisible = true; loginVisible = false">注册</a>
+            </div>
+        </form>
     </div>
+    <div v-show="signUpVisible" class="signUp" v-cloak>
+        <form class="form" @submit.prevent="onSignUp">
+            <h2>注册</h2>
+            <button type="button" @click="loginVisible = false">关闭</button>
+            <div class="row">
+                <label>邮箱</label>
+                <input type="text" v-model="signUp.email">
+            </div>
+            <div class="row">
+                <label>密码</label>
+                <input type="password" v-model="signUp.password">
+            </div>
+            <div class="actions">
+                <button type="submit">提交</button>
+                <a href="#" @click="signUpVisible=false; loginVisible=true;">登录</a>
+            </div>
+        </form>
+    </div>
+</div>
 
-    <script src="./vendors/av-min.js"></script>
-    <script src="./JS/av.js"></script>
-    <script src="./vendors/vue.min.js"></script>
-    <script src="./JS/editable-span.js"></script>
-    <script src="./JS/app.js"></script>
+<script src="./vendors/av-min.js"></script>
+<script src="./JS/av.js"></script>
+<script src="./vendors/vue.min.js"></script>
+<script src="./JS/editable-span.js"></script>
+<script src="./JS/app.js"></script>
 </body>
 
 </html>
