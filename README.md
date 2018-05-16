@@ -21,3 +21,7 @@ Vue.component('my-component-name', { /* ... */ })
     <button @click="editing = !editing">edit</button>
 </span>
 ```
+## box-shadow可以平铺整个页面，设置半透明
+```
+box-shadow: 0 0 0 10000px rgba(0,0,0,0.5);
+```
