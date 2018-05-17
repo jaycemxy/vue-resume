@@ -1,6 +1,8 @@
 Vue.component('skinPicker',{
     methods: {
-        setTheme
+        setTheme(name){
+            document.body.className = name
+        }
     },
     template: `
     <div class="skinPicker">

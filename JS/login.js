@@ -1,9 +1,11 @@
 Vue.component('login', {
-    data: {
-        login: {
-            email: '',
-            password: ''
-        },
+    data() {
+        return {
+            login: {
+                email: '',
+                password: ''
+            },
+        }
     },
     method: {
         onLogin(e) {
@@ -26,7 +28,7 @@ Vue.component('login', {
     <div class="login" v-cloak>
       <form class="form" @submit.prevent="onLogin">
           <h2>登录</h2>
-          <button type="button" @click="loginVisible = false">关闭</button>
+          <button type="button" @click="$emit('close')">关闭</button>
           <div class="row">
               <label>邮箱</label>
               <input type="text" v-model="login.email">

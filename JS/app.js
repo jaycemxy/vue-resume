@@ -64,11 +64,23 @@ let app = new Vue({
     watch: {
         'currentUser.objectId': function (newValue, oldValue) {
             if (newValue) {
-                this.getResume(this.currentUser)
+                this.getResume(this.currentUser).then((resume) => this.resume = resume)
             }
         }
     },
     methods: {
+        onShare() {
+            if(this.hasLogin()) {
+                this.shareVisible = true
+            }else{
+                alert('请先登录')
+            }
+        },
+        onLogin(user) {
+            this.currentUser.objectId =user.objectId
+            this.currentUser.email = user.email
+            this.loginVisible =false
+        },
         onEdit(key, value) {
             let regex = /\[(\d+)\]/g
             key = key.replace(regex, (match, number) => `.${number}`)
@@ -143,9 +155,6 @@ let app = new Vue({
         print(){
             window.print()
         },
-        setTheme(name){
-            document.body.className = name
-        }
     }
 })
 
