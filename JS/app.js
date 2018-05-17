@@ -53,14 +53,6 @@ let app = new Vue({
                 },
             ]
         },
-        login: {
-            email: '',
-            password: ''
-        },
-        signUp: {
-            email: '',
-            password: ''
-        },
         shareLink: '不知道',
         mode: 'edit', // 'preview'
     },
@@ -94,39 +86,10 @@ let app = new Vue({
         hasLogin() {
             return !!this.currentUser.objectId
         },
-        onLogin(e) {
-            AV.User.logIn(this.login.email, this.login.password).then((user) => {
-                user = user.toJSON()
-                this.currentUser.objectId = user.objectId
-                this.currentUser.email = user.email
-                this.loginVisible = false
-            }, (error) => {
-                if (error.code === 211) {
-                    alert('邮箱不存在')
-                } else if (error.code === 210) {
-                    alert('邮箱和密码不匹配')
-                }
-            })
-        },
         onLogout(e) {
             AV.User.logOut();
             alert('注销成功')
             window.location.reload()
-        },
-        onSignUp(e) {
-            const user = new AV.User()
-            user.setUsername(this.signUp.email)
-            user.setPassword(this.signUp.password)
-            user.setEmail(this.signUp.email)
-            user.signUp().then((user) => {
-                alert('注册成功')
-                user = user.toJSON()
-                this.currentUser.objectId = user.objectId
-                this.currentUser.email = user.email
-                this.signUpVisible = false
-            }, (error) => {
-                alert(error.rawMessage)
-            })
         },
         onClickSave() {
             let currentUser = AV.User.current()
