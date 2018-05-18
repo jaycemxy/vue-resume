@@ -3,14 +3,14 @@
     min-width: 300px;
     min-height: 400px;
     transform: translate(-50%, -50%);
-    top: 50%;
     left: 50%;
-    background: pink;
+    top: 50%;
+    background: #ddd;
     display: flex;
     justify-content: center;
     align-items: stretch;
 }
 
-.login > .form {
+.login>.form {
     width: 100%;
 }

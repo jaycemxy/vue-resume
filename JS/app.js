@@ -5,6 +5,7 @@ let app = new Vue({
         loginVisible: false,
         signUpVisible: false,
         shareVisible: false,
+        shareLink: '',
         skinPickerVisible: false,
         previewUser: {
             objectId: undefined,
@@ -53,7 +54,6 @@ let app = new Vue({
                 },
             ]
         },
-        shareLink: '不知道',
         mode: 'edit', // 'preview'
     },
     computed: {
@@ -70,16 +70,16 @@ let app = new Vue({
     },
     methods: {
         onShare() {
-            if(this.hasLogin()) {
+            if (this.hasLogin()) {
                 this.shareVisible = true
-            }else{
+            } else {
                 alert('请先登录')
             }
         },
         onLogin(user) {
-            this.currentUser.objectId =user.objectId
+            this.currentUser.objectId = user.objectId
             this.currentUser.email = user.email
-            this.loginVisible =false
+            this.loginVisible = false
         },
         onEdit(key, value) {
             let regex = /\[(\d+)\]/g
@@ -132,27 +132,7 @@ let app = new Vue({
                 // 异常处理
             });
         },
-        addSkill() {
-            this.resume.skills.push({
-                name: '请填写技能名称',
-                description: '请填写技能描述'
-            })
-        },
-        removeSkill(index) {
-            this.resume.skills.splice(index, 1)
-        },
-        addProject() {
-            this.resume.projects.push({
-                name: '请填写项目名称',
-                link: 'http://...',
-                keywords: '请填写关键词',
-                description: '请详细描述'
-            }, )
-        },
-        removeProject(index) {
-            this.resume.projects.splice(index, 1)
-        },
-        print(){
+        print() {
             window.print()
         },
     }

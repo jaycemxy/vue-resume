@@ -1,4 +1,4 @@
-body.default{}
+body.default {}
 
 body.default .resume {
     max-width: 800px;
@@ -9,7 +9,11 @@ body.default .resume>section {
     margin: 50px 0;
 }
 
-body.default .resume>section>h1,
+body.default .resume>section>h1 {
+    text-align: center;
+    margin: 20px;
+}
+
 body.default .resume>section>h2 {
     text-align: center;
     margin: 20px;
@@ -27,9 +31,9 @@ body.default .resume .skills>ul {
 
 body.default .resume .skills>ul>li {
     width: 48%;
-    margin-top: 10px;
     border: 1px solid #ddd;
     padding: 10px;
+    margin-top: 10px;
 }
 
 body.default .resume .projects>ol>li {

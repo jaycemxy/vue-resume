@@ -7,7 +7,7 @@ Vue.component('login', {
             },
         }
     },
-    method: {
+    methods: {
         onLogin(e) {
             AV.User.logIn(this.login.email, this.login.password).then((user) => {
                 user = user.toJSON()
@@ -27,20 +27,20 @@ Vue.component('login', {
     template: `
     <div class="login" v-cloak>
       <form class="form" @submit.prevent="onLogin">
-          <h2>登录</h2>
-          <button type="button" @click="$emit('close')">关闭</button>
-          <div class="row">
-              <label>邮箱</label>
-              <input type="text" v-model="login.email">
-          </div>
-          <div class="row">
-              <label>密码</label>
-              <input type="password" v-model="login.password">
-          </div>
-          <div class="actions">
-              <button type="submit">提交</button>
-              <a href="#" @click="onClickSignUp">注册</a>
-          </div>
+        <h2>登录</h2>
+        <button type="button" @click="$emit('close')">关闭</button>
+        <div class="row">
+          <label>邮箱</label>
+          <input type="text" v-model="login.email">
+        </div>
+        <div class="row">
+          <label>密码</label>
+          <input type="password" v-model="login.password">
+        </div>
+        <div class="actions">
+          <button type="submit">提交</button>
+          <a href="#" @click="onClickSignUp">注册</a>
+        </div>
       </form>
     </div>
     `
