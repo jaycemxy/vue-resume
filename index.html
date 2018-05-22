@@ -16,21 +16,14 @@
 </head>
 
 <body class="default">
-    <div class="page" id="app">
-        <app-aside v-show="mode === 'edit'" :logout-visible="true" @logout="onLogout" @save="onClickSave"></app-aside>
-        <main>
-            <resume :mode="mode" :display-resume="displayResume"></resume>
-        </main>
-        <login v-show="loginVisible" @close="loginVisible=false" @login="onLogin"></login>
-        <share :share-link="shareLink" v-show="shareVisible"></share>
-        <sign-up v-show="signUpVisible"></sign-up>
-        <skin-picker v-show="skinPickerVisible"></skin-picker>
-        <button class="exitPreview" @click="mode = 'edit'" v-if="mode === 'preview'">退出预览</button>
+    <div class="page" id="root">
+        <router-view></router-view>
     </div>
 
     <script src="./vendors/av-min.js"></script>
     <script src="./JS/av.js"></script>
     <script src="./vendors/vue.min.js"></script>
+    <script src="./vendors/vue-router.js"></script>
     <script src="./JS/editable-span.js"></script>
     <script src="./JS/login.js"></script>
     <script src="./JS/share.js"></script>
@@ -39,6 +32,7 @@
     <script src="./JS/resume.js"></script>
     <script src="./JS/app-aside.js"></script>
     <script src="./JS/app.js"></script>
+    <script src="./JS/root.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-Vue.component('signUp', {
+window.signUp = {
     data() {
         return {
             signUp: {
@@ -27,10 +27,9 @@ Vue.component('signUp', {
     },
     template: `
     <div class="signUp" v-cloak>
-    hihihi
       <form class="form" @submit.prevent="onSignUp">
         <h2>注册</h2>
-        <button type="button" @click="loginVisible = false">关闭</button>
+        <router-link to="/">关闭</router-link>
         <div class="row">
           <label>邮箱</label>
           <input type="text" v-model="signUp.email">
@@ -41,9 +40,10 @@ Vue.component('signUp', {
         </div>
         <div class="actions">
           <button type="submit">提交</button>
-          <a href="#" @click="onClickLogin">登录</a>
+          <router-link to="/login">登陆</router-link>
         </div>
       </form>
     </div>
     `
-})
+}
+Vue.component('signUp', window.signUp)
